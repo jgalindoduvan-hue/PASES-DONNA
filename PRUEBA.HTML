@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -9,8 +9,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: url('https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/yu52tly4lo6f1.jpeg?raw=true') no-repeat center center fixed;
-  background-size: cover;
+  background: linear-gradient(180deg, #0a0a1a, #1a0033, #000);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,6 +17,7 @@ body {
   overflow: hidden;
 }
 
+/* Caja inicial de nombres */
 .container {
   background: rgba(0,0,0,0.7);
   padding: 30px;
@@ -26,39 +26,7 @@ body {
   width: 400px;
   color: white;
   position: relative;
-  z-index: 1;
-}
-
-/* === Partículas moradas en el fondo === */
-#particles {
-  position: absolute;
-  bottom: 0;   /* pegadas al fondo */
-  left: 0;
-  width: 100%;
-  height: 100px; /* solo ocupan 100px de alto (unos 2cm) */
-  pointer-events: none;
-  z-index: 0;
-}
-
-.particle {
-  position: absolute;
-  bottom: 0;
-  width: 6px;
-  height: 6px;
-  background: rgba(200,0,255,0.9);
-  border-radius: 50%;
-  animation: rise 3s linear infinite;
-}
-
-@keyframes rise {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) scale(0.3); /* solo suben 100px = ~2cm */
-    opacity: 0;
-  }
+  z-index: 2;
 }
 
 input {
@@ -74,9 +42,14 @@ button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  background-color: gold;
+  background: linear-gradient(90deg, #6a00ff, #b300ff);
+  color: white;
   cursor: pointer;
   font-weight: bold;
+  transition: transform 0.2s;
+}
+button:hover {
+  transform: scale(1.1);
 }
 
 ul {
@@ -106,6 +79,7 @@ ul li button {
   cursor: pointer;
 }
 
+/* Pantalla negra flash */
 .flash {
   position: fixed;
   top: 0; left: 0;
@@ -115,6 +89,7 @@ ul li button {
   z-index: 2000;
 }
 
+/* Overlay video */
 .video-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -131,14 +106,12 @@ ul li button {
 .after-video-bg {
   position: absolute;
   top:0; left:0;
-  width:100%;
-  height:100%;
+  width:100%; height:100%;
   background: url('https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/desktop-wallpaper-black-and-purple-dark-blue-and-purple.jpg?raw=true') no-repeat center center;
   background-size: cover;
   z-index: 0;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  display: block;
 }
 
 video {
@@ -148,38 +121,28 @@ video {
   position: relative;
 }
 
-/* === Logos colaboración en izquierda y derecha === */
+/* Logos */
 .logo-block {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 2;
 }
-
-.logo-izquierdo {
-  left: 30px;
-}
-
-.logo-derecho {
-  right: 30px;
-}
+.logo-izquierdo { left: 5vw; }
+.logo-derecho { right: 5vw; }
 
 .logo-block img {
-  width: 160px;
-  margin: 15px 0;
+  width: 12vw;
+  min-width: 80px;
+  max-width: 180px;
+  margin: 10px 0;
   transition: transform 0.3s ease;
 }
 
-.logo-izquierdo img {
-  animation: neonBreathBlue 2s infinite alternate;
-}
-
-.logo-derecho img {
-  animation: neonBreathPurple 2s infinite alternate;
-}
+.logo-izquierdo img { animation: neonBreathBlue 2s infinite alternate; }
+.logo-derecho img { animation: neonBreathPurple 2s infinite alternate; }
 
 .logo-x {
   font-size: 60px;
@@ -189,34 +152,28 @@ video {
   animation: neonGlow 2s infinite alternate;
 }
 
-/* Animaciones respiración */
+/* Animaciones logos */
 @keyframes neonBreathBlue {
-  0%   { filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #00ffff); transform: scale(1); }
-  100% { filter: drop-shadow(0 0 25px #00ffff) drop-shadow(0 0 45px #00ffff); transform: scale(1.05); }
+  0% { filter: drop-shadow(0 0 10px #00ffff); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 25px #00ffff); transform: scale(1.05); }
 }
-
 @keyframes neonBreathPurple {
-  0%   { filter: drop-shadow(0 0 10px #ff00ff) drop-shadow(0 0 20px #ff00ff); transform: scale(1); }
-  100% { filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 45px #ff00ff); transform: scale(1.05); }
+  0% { filter: drop-shadow(0 0 10px #ff00ff); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 25px #ff00ff); transform: scale(1.05); }
 }
-
 @keyframes neonGlow {
-  0% { text-shadow: 0 0 5px #00f0ff, 0 0 15px #00f0ff, 0 0 25px #00f0ff; }
-  100% { text-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff; }
+  0% { text-shadow: 0 0 5px #00f0ff, 0 0 15px #00f0ff; }
+  100% { text-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff; }
 }
 
+/* Ruleta */
 #roulette {
   display: none;
   font-family: 'Bangers', cursive;
   font-size: 2rem;
   color: white;
   letter-spacing: 2px;
-  text-transform: uppercase;
   margin-top: 20px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   animation: neonGlow 2s ease-in-out infinite;
   z-index: 2;
   position: relative;
@@ -230,8 +187,6 @@ video {
   margin-top: 20px;
   text-align: center;
   animation: neonGlow 2s ease-in-out infinite;
-  z-index: 2;
-  position: relative;
 }
 
 #retryBtn {
@@ -244,7 +199,6 @@ video {
   font-weight: bold;
   display: none;
   z-index: 2;
-  position: relative;
 }
 
 #winnerGif {
@@ -252,19 +206,51 @@ video {
   display: none;
   max-width: 200px;
   z-index: 2;
-  position: relative;
+}
+
+/* Partículas abajo */
+.particles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.particle {
+  position: absolute;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle, #ff00ff, transparent);
+  border-radius: 50%;
+  animation: floatUp 4s linear infinite;
+  opacity: 0.9;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-120px) scale(0.6); opacity: 0; }
 }
 </style>
 </head>
 <body>
-<!-- Partículas en el fondo inicial -->
-<div id="particles"></div>
-
 <div class="container" id="main-container">
   <h2>Agrega nombres</h2>
   <input type="text" id="nameInput" placeholder="Escribe un nombre y presiona Enter">
   <ul id="nameList"></ul>
   <button id="startBtn">Iniciar</button>
+
+  <!-- Partículas solo en pantalla inicial -->
+  <div class="particles">
+    <div class="particle" style="left:10%; animation-delay:0s;"></div>
+    <div class="particle" style="left:25%; animation-delay:1s;"></div>
+    <div class="particle" style="left:40%; animation-delay:0.5s;"></div>
+    <div class="particle" style="left:60%; animation-delay:1.5s;"></div>
+    <div class="particle" style="left:75%; animation-delay:2s;"></div>
+    <div class="particle" style="left:90%; animation-delay:0.8s;"></div>
+  </div>
 </div>
 
 <div class="video-overlay" id="videoOverlay">
@@ -274,14 +260,13 @@ video {
     Tu navegador no soporta videos.
   </video>
 
-  <!-- Bloque de logos izquierdo -->
+  <!-- Logos -->
   <div class="logo-block logo-izquierdo">
     <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/1000271847-Photoroom.png?raw=true" alt="Logo Colaboración">
     <div class="logo-x">X</div>
     <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/new_logo_mobile_legends_bang_bang_2024_png_by_wolvesdzn_dis0mte-fullview.png?raw=true" alt="Logo MLBB">
   </div>
 
-  <!-- Bloque de logos derecho -->
   <div class="logo-block logo-derecho">
     <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/1000271847-Photoroom.png?raw=true" alt="Logo Colaboración">
     <div class="logo-x">X</div>
@@ -309,22 +294,8 @@ const flashEffect = document.getElementById("flashEffect");
 const mainContainer = document.getElementById("main-container");
 const winnerGif = document.getElementById("winnerGif");
 const afterVideoBg = document.getElementById("afterVideoBg");
-const particles = document.getElementById("particles");
 
 let names = [];
-
-// Generar partículas automáticamente
-function createParticles(){
-  for(let i=0;i<30;i++){
-    let p = document.createElement("div");
-    p.classList.add("particle");
-    p.style.left = Math.random()*100 + "%";
-    p.style.animationDuration = (2 + Math.random()*2) + "s";
-    p.style.animationDelay = (Math.random()*2) + "s";
-    particles.appendChild(p);
-  }
-}
-createParticles();
 
 nameInput.addEventListener("keypress", e => {
   if(e.key === "Enter" && nameInput.value.trim() !== "") {
@@ -341,7 +312,7 @@ function renderNames() {
     li.textContent = name;
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "X";
-    removeBtn.onclick = ()=>{names.splice(index,1); renderNames();}
+    removeBtn.onclick = ()=>{names.splice(index,1); renderNames();};
     li.appendChild(removeBtn);
     nameList.appendChild(li);
   });
@@ -349,13 +320,15 @@ function renderNames() {
 
 function showBlackThenVideo(callback){
   flashEffect.style.display="block";
-  setTimeout(()=>{ flashEffect.style.display="none"; if(callback) callback(); },300);
+  setTimeout(()=>{
+    flashEffect.style.display="none";
+    if(callback) callback();
+  },300);
 }
 
 startBtn.addEventListener("click",()=>{
   if(names.length===0){alert("Agrega al menos un nombre."); return;}
   mainContainer.style.display="none";
-  particles.style.display="none"; // ocultar partículas cuando inicia video
   showBlackThenVideo(()=>{
     winnerDiv.style.display="none";
     rouletteDiv.style.display="none";
@@ -384,7 +357,9 @@ function startRoulette(){
   let start = null;
   const finalIndex = Math.floor(Math.random()*names.length);
   const winnerName = names[finalIndex];
+
   function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+
   function animate(timestamp){
     if(!start) start = timestamp;
     let elapsed = timestamp - start;
@@ -392,9 +367,9 @@ function startRoulette(){
     let eased = easeOut(progress);
     let index = Math.floor(eased * names.length * 10) % names.length;
     rouletteDiv.textContent = names[index];
-    if(progress < 1){
-      requestAnimationFrame(animate);
-    } else {
+
+    if(progress < 1){ requestAnimationFrame(animate); }
+    else {
       rouletteDiv.textContent = winnerName;
       setTimeout(()=>{
         rouletteDiv.style.display = "none";
@@ -416,8 +391,8 @@ retryBtn.addEventListener("click",()=>{
   afterVideoBg.style.opacity = 0;
   videoOverlay.style.display="none";
   mainContainer.style.display="block";
-  particles.style.display="block"; // mostrar partículas de nuevo al reiniciar
 });
 </script>
 </body>
 </html>
+
