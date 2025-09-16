@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBLL Sorteo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Anton&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/yu52tly4lo6f1.jpeg?raw=true') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  background: rgba(0,0,0,0.7);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  width: 400px;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+/* === Partículas moradas en el fondo === */
+#particles {
+  position: absolute;
+  bottom: 0;   /* pegadas al fondo */
+  left: 0;
+  width: 100%;
+  height: 100px; /* solo ocupan 100px de alto (unos 2cm) */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background: rgba(200,0,255,0.9);
+  border-radius: 50%;
+  animation: rise 3s linear infinite;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(0.3); /* solo suben 100px = ~2cm */
+    opacity: 0;
+  }
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: gold;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+ul li {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul li button {
+  background: red;
+  color: white;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.flash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  display: none;
+  z-index: 2000;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.after-video-bg {
+  position: absolute;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: url('https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/desktop-wallpaper-black-and-purple-dark-blue-and-purple.jpg?raw=true') no-repeat center center;
+  background-size: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: block;
+}
+
+video {
+  max-width: 300px;
+  border-radius: 10px;
+  z-index: 1;
+  position: relative;
+}
+
+/* === Logos colaboración en izquierda y derecha === */
+.logo-block {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.logo-izquierdo {
+  left: 30px;
+}
+
+.logo-derecho {
+  right: 30px;
+}
+
+.logo-block img {
+  width: 160px;
+  margin: 15px 0;
+  transition: transform 0.3s ease;
+}
+
+.logo-izquierdo img {
+  animation: neonBreathBlue 2s infinite alternate;
+}
+
+.logo-derecho img {
+  animation: neonBreathPurple 2s infinite alternate;
+}
+
+.logo-x {
+  font-size: 60px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #ff00ff, 0 0 30px #00f0ff;
+  animation: neonGlow 2s infinite alternate;
+}
+
+/* Animaciones respiración */
+@keyframes neonBreathBlue {
+  0%   { filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #00ffff); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 25px #00ffff) drop-shadow(0 0 45px #00ffff); transform: scale(1.05); }
+}
+
+@keyframes neonBreathPurple {
+  0%   { filter: drop-shadow(0 0 10px #ff00ff) drop-shadow(0 0 20px #ff00ff); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 45px #ff00ff); transform: scale(1.05); }
+}
+
+@keyframes neonGlow {
+  0% { text-shadow: 0 0 5px #00f0ff, 0 0 15px #00f0ff, 0 0 25px #00f0ff; }
+  100% { text-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff; }
+}
+
+#roulette {
+  display: none;
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
+  color: white;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: neonGlow 2s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+
+#winner {
+  display: none;
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
+  color: white;
+  margin-top: 20px;
+  text-align: center;
+  animation: neonGlow 2s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+
+#retryBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: gold;
+  cursor: pointer;
+  font-weight: bold;
+  display: none;
+  z-index: 2;
+  position: relative;
+}
+
+#winnerGif {
+  margin-top: 20px;
+  display: none;
+  max-width: 200px;
+  z-index: 2;
+  position: relative;
+}
+</style>
+</head>
+<body>
+<!-- Partículas en el fondo inicial -->
+<div id="particles"></div>
+
+<div class="container" id="main-container">
+  <h2>Agrega nombres</h2>
+  <input type="text" id="nameInput" placeholder="Escribe un nombre y presiona Enter">
+  <ul id="nameList"></ul>
+  <button id="startBtn">Iniciar</button>
+</div>
+
+<div class="video-overlay" id="videoOverlay">
+  <div class="after-video-bg" id="afterVideoBg"></div>
+  <video id="introVideo">
+    <source src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/mlbbttofficial_7548003231855676680.mp4?raw=true" type="video/mp4">
+    Tu navegador no soporta videos.
+  </video>
+
+  <!-- Bloque de logos izquierdo -->
+  <div class="logo-block logo-izquierdo">
+    <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/1000271847-Photoroom.png?raw=true" alt="Logo Colaboración">
+    <div class="logo-x">X</div>
+    <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/new_logo_mobile_legends_bang_bang_2024_png_by_wolvesdzn_dis0mte-fullview.png?raw=true" alt="Logo MLBB">
+  </div>
+
+  <!-- Bloque de logos derecho -->
+  <div class="logo-block logo-derecho">
+    <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/1000271847-Photoroom.png?raw=true" alt="Logo Colaboración">
+    <div class="logo-x">X</div>
+    <img class="logo" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/new_logo_mobile_legends_bang_bang_2024_png_by_wolvesdzn_dis0mte-fullview.png?raw=true" alt="Logo MLBB">
+  </div>
+
+  <div id="roulette"></div>
+  <div id="winner"></div>
+  <button id="retryBtn">Volver a intentar</button>
+  <img id="winnerGif" src="https://github.com/jgalindoduvan-hue/MBLL-PRUEBAS/blob/main/tenor.gif?raw=true" alt="GIF Ganador">
+</div>
+
+<div class="flash" id="flashEffect"></div>
+
+<script>
+const nameInput = document.getElementById("nameInput");
+const nameList = document.getElementById("nameList");
+const startBtn = document.getElementById("startBtn");
+const winnerDiv = document.getElementById("winner");
+const rouletteDiv = document.getElementById("roulette");
+const videoOverlay = document.getElementById("videoOverlay");
+const introVideo = document.getElementById("introVideo");
+const retryBtn = document.getElementById("retryBtn");
+const flashEffect = document.getElementById("flashEffect");
+const mainContainer = document.getElementById("main-container");
+const winnerGif = document.getElementById("winnerGif");
+const afterVideoBg = document.getElementById("afterVideoBg");
+const particles = document.getElementById("particles");
+
+let names = [];
+
+// Generar partículas automáticamente
+function createParticles(){
+  for(let i=0;i<30;i++){
+    let p = document.createElement("div");
+    p.classList.add("particle");
+    p.style.left = Math.random()*100 + "%";
+    p.style.animationDuration = (2 + Math.random()*2) + "s";
+    p.style.animationDelay = (Math.random()*2) + "s";
+    particles.appendChild(p);
+  }
+}
+createParticles();
+
+nameInput.addEventListener("keypress", e => {
+  if(e.key === "Enter" && nameInput.value.trim() !== "") {
+    names.push(nameInput.value.trim());
+    renderNames();
+    nameInput.value = "";
+  }
+});
+
+function renderNames() {
+  nameList.innerHTML = "";
+  names.forEach((name,index)=>{
+    const li = document.createElement("li");
+    li.textContent = name;
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "X";
+    removeBtn.onclick = ()=>{names.splice(index,1); renderNames();}
+    li.appendChild(removeBtn);
+    nameList.appendChild(li);
+  });
+}
+
+function showBlackThenVideo(callback){
+  flashEffect.style.display="block";
+  setTimeout(()=>{ flashEffect.style.display="none"; if(callback) callback(); },300);
+}
+
+startBtn.addEventListener("click",()=>{
+  if(names.length===0){alert("Agrega al menos un nombre."); return;}
+  mainContainer.style.display="none";
+  particles.style.display="none"; // ocultar partículas cuando inicia video
+  showBlackThenVideo(()=>{
+    winnerDiv.style.display="none";
+    rouletteDiv.style.display="none";
+    retryBtn.style.display="none";
+    winnerGif.style.display="none";
+    afterVideoBg.style.opacity = 0;
+    videoOverlay.style.display="flex";
+    introVideo.currentTime=0;
+    introVideo.style.display="block";
+    introVideo.play();
+
+    introVideo.addEventListener('timeupdate', () => {
+      const showTime = introVideo.duration - 0.5;
+      if(introVideo.currentTime >= showTime){
+        afterVideoBg.style.opacity = 1;
+      }
+    });
+
+    introVideo.onended=()=>{ introVideo.style.display="none"; startRoulette(); };
+  });
+});
+
+function startRoulette(){
+  rouletteDiv.style.display="flex";
+  let totalTime = 7000;
+  let start = null;
+  const finalIndex = Math.floor(Math.random()*names.length);
+  const winnerName = names[finalIndex];
+  function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+  function animate(timestamp){
+    if(!start) start = timestamp;
+    let elapsed = timestamp - start;
+    let progress = Math.min(elapsed / totalTime, 1);
+    let eased = easeOut(progress);
+    let index = Math.floor(eased * names.length * 10) % names.length;
+    rouletteDiv.textContent = names[index];
+    if(progress < 1){
+      requestAnimationFrame(animate);
+    } else {
+      rouletteDiv.textContent = winnerName;
+      setTimeout(()=>{
+        rouletteDiv.style.display = "none";
+        winnerDiv.textContent = "🎉 El ganador es: "+winnerName+" 🎉";
+        winnerDiv.style.display="block";
+        retryBtn.style.display="inline-block";
+        winnerGif.style.display="block";
+      }, 500);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+retryBtn.addEventListener("click",()=>{
+  winnerDiv.style.display="none";
+  retryBtn.style.display="none";
+  rouletteDiv.style.display="none";
+  winnerGif.style.display="none";
+  afterVideoBg.style.opacity = 0;
+  videoOverlay.style.display="none";
+  mainContainer.style.display="block";
+  particles.style.display="block"; // mostrar partículas de nuevo al reiniciar
+});
+</script>
+</body>
+</html>
